@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot_study_01.Dao.UserMapper">
+    <resultMap id="result" type="com.example.springboot_study_01.Entity.User">
+        <result property="Userid" column="Userid"/>
+        <result property="Username" column="Username"/>
+        <result property="Userage" column="Userage"/>
+        <result property="Usersex" column="Usersex"/>
+        <result property="Userphone" column="Userphone"/>
+        <result property="Useraccount" column="Useraccount"/>
+        <result property="Userpassword" column="Userpassword"/>
+    </resultMap>
+    <select id="find" resultMap="result">
+        select * from user where Username=#{name};
+    </select>
+    <select id="find2" resultMap="result">
+        select * from user ${ew.customSqlSegment};
+    </select>
+    <select id="list" resultMap="result">
+        select * from user;
+    </select>
+    <insert id="insert" parameterType="com.example.springboot_study_01.Entity.User">
+        insert into user(Userid,Username,Userage,Usersex,Userphone,Useraccount,Userpassword)
+        values(#{Userid},#{Username},#{Userage},#{Usersex},#{Userphone},#{Useraccount},#{Userpassword});
+    </insert>
+    <update id="update" parameterType="com.example.springboot_study_01.Entity.User">
+        update user
+        set Username = #{name},Userage = #{age},Usersex = #{sex}
+        where Userid = #{id};
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from user where Userid = #{id};
+    </delete>
+</mapper>

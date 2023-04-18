@@ -1,0 +1,31 @@
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot_study_01.Dao.BookMapper">
+    <resultMap id="result" type="com.example.springboot_study_01.Entity.Book">
+        <result property="bookid" column="Bookid"/>
+        <result property="bookname" column="Bookname"/>
+        <result property="bookauthor" column="Bookauthor"/>
+        <result property="bookconcern" column="Bookconcern"/>
+        <result property="bookprice" column="Bookprice"/>
+        <result property="bookamount" column="Bookamount"/>
+    </resultMap>
+    <select id="find" resultMap="result">
+        select * from book where Bookid=#{bookid};
+    </select>
+    <select id="list" resultMap="result">
+        select * from book;
+    </select>
+    <insert id="insert" parameterType="com.example.springboot_study_01.Entity.Book" >
+        insert into book(Bookid,Bookname,Bookauthor,Bookconcern,Bookprice,Bookamount)
+        values(#{bookid},#{bookname},#{bookauthor},#{bookconcern},#{bookprice},#{bookamount});
+    </insert>
+    <update id="updatebook" parameterType="com.example.springboot_study_01.Entity.Book">
+        update book
+        set Bookname=#{bookname},Bookauthor=#{bookauthor},Bookconcern=#{bookconcern},Bookprice=#{bookprice},Bookamount=#{bookamount}
+        where Bookid=#{bookid}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from book where Bookid = #{bookid};
+    </delete>
+</mapper>
